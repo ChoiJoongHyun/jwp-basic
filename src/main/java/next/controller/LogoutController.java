@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 public class LogoutController implements Controller {
     private static final long serialVersionUID = 1L;
 
-    
-
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		HttpSession session = req.getSession();

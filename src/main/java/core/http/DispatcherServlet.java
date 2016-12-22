@@ -34,7 +34,7 @@ public class DispatcherServlet extends HttpServlet {
 		try {
 			//컨트롤 실행
 			String url = controller.execute(req, resp);
-			
+			logger.debug("DispatcherServlet start doget url : " + url);
 			if(url.startsWith("redirect:")) {
 				
 				resp.sendRedirect(url.split("redirect:")[1]);
