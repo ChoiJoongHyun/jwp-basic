@@ -35,34 +35,21 @@ public class DispatcherServlet extends HttpServlet {
 			//컨트롤 실행
 			String url = controller.execute(req, resp);
 			logger.debug("DispatcherServlet start doget url : " + url);
-			if(url.startsWith("redirect:")) {
-				
-				resp.sendRedirect(url.split("redirect:")[1]);
-			} else {
-				
-				
-				RequestDispatcher rd = req.getRequestDispatcher(url);
-				rd.forward(req, resp);
-			}
+			move(url, req, resp);
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
 	}
-	  
-//	      if (!UserSessionUtils.isLogined(req.getSession())) {
-//	          resp.sendRedirect("/users/loginForm");
-//	          return;
-//	      }
-//	
-//	      req.setAttribute("users", DataBase.findAll());
-//	
-//	      RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-//	      rd.forward(req, resp);
 	
-	
-	
+	private void move(String url, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		if(url.startsWith("redirect:")) {
+			resp.sendRedirect(url.split("redirect:")[1]);
+		} else {
+			RequestDispatcher rd = req.getRequestDispatcher(url);
+			rd.forward(req, resp);
+		}
+	}
 }
